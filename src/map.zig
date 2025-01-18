@@ -11,21 +11,32 @@ const map = [constants.MAP_NUM_ROWS][constants.MAP_NUM_COLS]u8{
     [_]u8{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
     [_]u8{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
     [_]u8{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    [_]u8{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    [_]u8{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-    [_]u8{ 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+    [_]u8{ 1, 0, 0, 0, 0, 0, 1, 1, 0, 1 },
+    [_]u8{ 1, 0, 0, 0, 0, 0, 1, 0, 0, 1 },
+    [_]u8{ 1, 0, 0, 0, 0, 0, 1, 0, 0, 1 },
     [_]u8{ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
 };
 
 pub fn render_map_grid(renderer: *c.SDL_Renderer) void {
-    _ = c.SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
-
-    for (map, 0..) |row, row_index| {
-        for (row, 0..) |col, col_index| {
+    for (map, 0..) |row, col_index| {
+        for (row, 0..) |col, row_index| {
             const tile_x = row_index * constants.TILE_SIZE;
             const tile_y = col_index * constants.TILE_SIZE;
 
             if (col == 1) {
+                _ = c.SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+                var rect: c.SDL_FRect = .{
+                    .x = @floatFromInt(tile_x),
+                    .y = @floatFromInt(tile_y),
+                    .w = constants.TILE_SIZE,
+                    .h = constants.TILE_SIZE,
+                };
+
+                _ = c.SDL_RenderFillRect(renderer, &rect);
+            }
+
+            if (col == 0) {
+                _ = c.SDL_SetRenderDrawColor(renderer, 0x21, 0x21, 0x21, 0xFF);
                 var rect: c.SDL_FRect = .{
                     .x = @floatFromInt(tile_x),
                     .y = @floatFromInt(tile_y),
