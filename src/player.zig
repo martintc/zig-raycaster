@@ -29,23 +29,23 @@ pub const Player = struct {
         _ = c.SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
 
         var rect: c.SDL_FRect = .{
-            .x = self.x,
-            .y = self.y,
-            .w = 5.0,
-            .h = 5.0,
+            .x = self.x * constants.MINIFY,
+            .y = self.y * constants.MINIFY,
+            .w = 5.0 * constants.MINIFY,
+            .h = 5.0 * constants.MINIFY,
         };
 
         _ = c.SDL_RenderFillRect(renderer, &rect);
 
-        _ = c.SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
+        // _ = c.SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
 
-        _ = c.SDL_RenderLine(
-            renderer,
-            self.x + 2.5,
-            self.y + 2.5,
-            self.x + 2.5 + math.cos(self.rotation_angle) * 40,
-            self.y + 2.5 + math.sin(self.rotation_angle) * 40,
-        );
+        // _ = c.SDL_RenderLine(
+        //     renderer,
+        //     self.x + 2.5 * constants.MINIFY,
+        //     self.y + 2.5 * constants.MINIFY,
+        //     self.x + 2.5 + math.cos(self.rotation_angle) * 40 * constants.MINIFY,
+        //     self.y + 2.5 + math.sin(self.rotation_angle) * 40 * constants.MINIFY,
+        // );
     }
 
     pub fn move(self: *Player, dt: f64) void {

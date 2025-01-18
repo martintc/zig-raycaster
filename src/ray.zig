@@ -163,8 +163,8 @@ pub const Ray = struct {
         for (0..@intFromFloat(longest_side)) |_| {
             _ = c.SDL_RenderPoint(
                 renderer,
-                cur_x,
-                cur_y,
+                cur_x * constants.MINIFY,
+                cur_y * constants.MINIFY,
             );
             cur_x += inc_x;
             cur_y += inc_y;

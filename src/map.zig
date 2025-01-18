@@ -26,10 +26,10 @@ pub fn render_map_grid(renderer: *c.SDL_Renderer) void {
             if (col == 1) {
                 _ = c.SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
                 var rect: c.SDL_FRect = .{
-                    .x = @floatFromInt(tile_x),
-                    .y = @floatFromInt(tile_y),
-                    .w = constants.TILE_SIZE,
-                    .h = constants.TILE_SIZE,
+                    .x = @as(f32, @floatFromInt(tile_x)) * constants.MINIFY,
+                    .y = @as(f32, @floatFromInt(tile_y)) * constants.MINIFY,
+                    .w = @as(f32, constants.TILE_SIZE) * constants.MINIFY,
+                    .h = @as(f32, constants.TILE_SIZE) * constants.MINIFY,
                 };
 
                 _ = c.SDL_RenderFillRect(renderer, &rect);
@@ -38,10 +38,10 @@ pub fn render_map_grid(renderer: *c.SDL_Renderer) void {
             if (col == 0) {
                 _ = c.SDL_SetRenderDrawColor(renderer, 0x21, 0x21, 0x21, 0xFF);
                 var rect: c.SDL_FRect = .{
-                    .x = @floatFromInt(tile_x),
-                    .y = @floatFromInt(tile_y),
-                    .w = constants.TILE_SIZE,
-                    .h = constants.TILE_SIZE,
+                    .x = @as(f32, @floatFromInt(tile_x)) * constants.MINIFY,
+                    .y = @as(f32, @floatFromInt(tile_y)) * constants.MINIFY,
+                    .w = @as(f32, constants.TILE_SIZE) * constants.MINIFY,
+                    .h = @as(f32, constants.TILE_SIZE) * constants.MINIFY,
                 };
 
                 _ = c.SDL_RenderFillRect(renderer, &rect);

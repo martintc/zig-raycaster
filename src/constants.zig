@@ -10,3 +10,4 @@ pub const TWO_PI = PI * 2;
 pub const NUM_RAYS = 1280;
 pub const FOV_ANGLE = (60.0 * (PI / 180.0));
 pub const DIST_PROJ_PLANE = ((@as(f32, WINDOW_WIDTH) / 2.0) / @tan(FOV_ANGLE / 2.0));
+pub const MINIFY = 0.2;
