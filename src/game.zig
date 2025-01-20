@@ -4,6 +4,7 @@ const constants = @import("constants.zig");
 const p = @import("player.zig");
 const map = @import("map.zig");
 const r = @import("ray.zig");
+const w = @import("wall.zig");
 
 pub const Game = struct {
     window: *c.SDL_Window,
@@ -95,7 +96,6 @@ pub const Game = struct {
         self.player.draw(self.renderer);
 
         for (0..constants.NUM_RAYS) |i| {
-            // const ray = self.rays[i];
             self.rays[i].draw(&self.player, self.renderer);
         }
     }
@@ -104,7 +104,11 @@ pub const Game = struct {
         _ = c.SDL_SetRenderDrawColor(self.renderer, 0x21, 0x21, 0x21, 0xFF);
         _ = c.SDL_RenderClear(self.renderer);
 
-        self.draw_mini_map();
+        for (0..constants.NUM_RAYS) |i| {
+            w.render_wall(self.renderer, self.rays[i], self.player, i);
+        }
+
+        // self.draw_mini_map();
 
         _ = c.SDL_RenderPresent(self.renderer);
     }
@@ -142,7 +146,6 @@ pub const Game = struct {
         while (!self.quit) {
             self.process_input();
             self.update();
-
             self.draw();
         }
     }

@@ -120,7 +120,7 @@ pub const Ray = struct {
                 .distance = v_hit_dist,
                 .wall_hit_x = v_wall_hit_x,
                 .wall_hit_y = v_wall_hit_y,
-                .wall_hit_content = 0,
+                .wall_hit_content = 1,
                 .was_hit_vertical = true,
                 .ray_angle = normalized_angle,
             };
@@ -131,7 +131,7 @@ pub const Ray = struct {
                 .distance = h_hit_dist,
                 .wall_hit_x = h_wall_hit_x,
                 .wall_hit_y = h_wall_hit_y,
-                .wall_hit_content = 0,
+                .wall_hit_content = 2,
                 .was_hit_vertical = false,
                 .ray_angle = normalized_angle,
             };
