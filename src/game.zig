@@ -5,7 +5,6 @@ const p = @import("player.zig");
 const map = @import("map.zig");
 const r = @import("ray.zig");
 const w = @import("wall.zig");
-const time = std.time;
 
 pub const Game = struct {
     window: *c.SDL_Window,
