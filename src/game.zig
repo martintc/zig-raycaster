@@ -5,6 +5,7 @@ const p = @import("player.zig");
 const map = @import("map.zig");
 const r = @import("ray.zig");
 const w = @import("wall.zig");
+const time = std.time;
 
 pub const Game = struct {
     window: *c.SDL_Window,
@@ -104,9 +105,7 @@ pub const Game = struct {
         _ = c.SDL_SetRenderDrawColor(self.renderer, 0x21, 0x21, 0x21, 0xFF);
         _ = c.SDL_RenderClear(self.renderer);
 
-        for (0..constants.NUM_RAYS) |i| {
-            w.render_wall(self.renderer, self.rays[i], self.player, i);
-        }
+        w.render_walls(self.renderer, &self.rays, &self.player);
 
         // self.draw_mini_map();
 

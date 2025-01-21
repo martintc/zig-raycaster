@@ -43,6 +43,8 @@ pub const Ray = struct {
         var h_wall_hit_y: f32 = undefined;
         //var h_wall_content: u8 = undefined;
 
+        // const normalized_tan = math.tan(normalized_angle);
+
         y_int = @floor(player.*.y / constants.TILE_SIZE) * constants.TILE_SIZE;
         y_int += if (is_ray_facing_down(normalized_angle)) constants.TILE_SIZE else 0;
 
