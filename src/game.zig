@@ -5,6 +5,7 @@ const p = @import("player.zig");
 const map = @import("map.zig");
 const r = @import("ray.zig");
 const w = @import("wall.zig");
+const math = std.math;
 
 pub const Game = struct {
     window: *c.SDL_Window,
@@ -85,7 +86,7 @@ pub const Game = struct {
 
         for (0..constants.NUM_RAYS) |i| {
             const strip: f32 = @floatFromInt(i);
-            const angle = self.player.rotation_angle + @tan((strip - constants.NUM_RAYS / 2) / constants.DIST_PROJ_PLANE);
+            const angle = self.player.rotation_angle + math.atan((strip - constants.NUM_RAYS / 2) / constants.DIST_PROJ_PLANE);
 
             self.rays[i] = r.Ray.cast_ray(&self.player, angle);
         }

@@ -36,16 +36,6 @@ pub const Player = struct {
         };
 
         _ = c.SDL_RenderFillRect(renderer, &rect);
-
-        // _ = c.SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
-
-        // _ = c.SDL_RenderLine(
-        //     renderer,
-        //     self.x + 2.5 * constants.MINIFY,
-        //     self.y + 2.5 * constants.MINIFY,
-        //     self.x + 2.5 + math.cos(self.rotation_angle) * 40 * constants.MINIFY,
-        //     self.y + 2.5 + math.sin(self.rotation_angle) * 40 * constants.MINIFY,
-        // );
     }
 
     pub fn move(self: *Player, dt: f64) void {

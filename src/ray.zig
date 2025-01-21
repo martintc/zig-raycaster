@@ -43,17 +43,17 @@ pub const Ray = struct {
         var h_wall_hit_y: f32 = undefined;
         //var h_wall_content: u8 = undefined;
 
-        // const normalized_tan = math.tan(normalized_angle);
+        const normalized_tan = math.tan(normalized_angle);
 
         y_int = @floor(player.*.y / constants.TILE_SIZE) * constants.TILE_SIZE;
         y_int += if (is_ray_facing_down(normalized_angle)) constants.TILE_SIZE else 0;
 
-        x_int = player.*.x + (y_int - player.*.y) / math.tan(normalized_angle);
+        x_int = player.*.x + (y_int - player.*.y) / normalized_tan;
 
         y_step = constants.TILE_SIZE;
         y_step *= if (is_ray_facing_up(normalized_angle)) -1 else 1;
 
-        x_step = constants.TILE_SIZE / math.tan(normalized_angle);
+        x_step = constants.TILE_SIZE / normalized_tan;
         x_step *= if (is_ray_facing_left(normalized_angle) and x_step > 0) -1 else 1;
         x_step *= if (is_ray_facing_right(normalized_angle) and x_step < 0) -1 else 1;
 
@@ -85,12 +85,12 @@ pub const Ray = struct {
         x_int = @floor(player.*.x / constants.TILE_SIZE) * constants.TILE_SIZE;
         x_int += if (is_ray_facing_right(normalized_angle)) constants.TILE_SIZE else 0;
 
-        y_int = player.*.y + (x_int - player.*.x) * math.tan(normalized_angle);
+        y_int = player.*.y + (x_int - player.*.x) * normalized_tan;
 
         x_step = constants.TILE_SIZE;
         x_step *= if (is_ray_facing_left(normalized_angle)) -1 else 1;
 
-        y_step = constants.TILE_SIZE * math.tan(normalized_angle);
+        y_step = constants.TILE_SIZE * normalized_tan;
         y_step *= if (is_ray_facing_up(normalized_angle) and y_step > 0) -1 else 1;
         y_step *= if (is_ray_facing_down(normalized_angle) and y_step < 0) -1 else 1;
 
@@ -146,11 +146,9 @@ pub const Ray = struct {
         const dx = (self.wall_hit_x - player.*.x);
         const dy = (self.wall_hit_y - player.*.y);
 
-        var longest_side: f32 = undefined;
+        var longest_side: f32 = @abs(dx);
 
-        if (@abs(dx) >= @abs(dy)) {
-            longest_side = @abs(dx);
-        } else {
+        if (@abs(dx) < @abs(dy)) {
             longest_side = @abs(dy);
         }
 
